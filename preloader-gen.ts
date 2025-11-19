@@ -99,7 +99,8 @@ async function generatePreloaderInfo() {
 	for (const mode of ["mobile", "desktop"] as const) {
 		const files = LOCAL_FILES[mode];
 		for (const url of files) {
-			const fullPath = path.join(ROOT, "public", url);
+			// Use ROOT + public + url only for filesystem access
+			const fullPath = path.join(ROOT, "public", url.replace(/^\.\//, ""));
 			if (!fs.existsSync(fullPath)) {
 				console.warn(`File not found: ${url}`);
 				continue;
@@ -107,6 +108,8 @@ async function generatePreloaderInfo() {
 
 			const size = fs.statSync(fullPath).size;
 			const ext = path.extname(fullPath).toLowerCase();
+
+			// Keep original url in JSON
 			allData.push({ url, size, type: getTypeByExt(ext), mode });
 		}
 
@@ -121,5 +124,3 @@ async function generatePreloaderInfo() {
 	fs.writeFileSync(OUTPUT_FILE, JSON.stringify(allData, null, 2));
 	console.log(`Preloader info generated at ${OUTPUT_FILE}`);
 }
-
-generatePreloaderInfo();
