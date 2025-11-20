@@ -1,24 +1,4 @@
 import { useEffect, useState, useMemo } from "react";
-const loadingImages: { [key: string]: string } = {
-    "🔮 Consulting ancient astrologers...": "https://media.giphy.com/media/3o7TKTDn976rzVgky4/giphy.gif",
-    "🤖 Deploying AI neural networks...": "https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif",
-    "⚛️ Using quantum computing algorithms...": "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",
-    "🔗 Scanning via blockchain technology...": "https://media.giphy.com/media/l0HlQXlQ3nHyLMvte/giphy.gif",
-    "🛸 Contacting NASA satellites...": "https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif",
-    "🧠 Analyzing with machine learning...": "https://media.giphy.com/media/l4FGpP4lxGGgK5CBW/giphy.gif",
-    "🌌 Accessing space-time continuum...": "https://media.giphy.com/media/3oKIPwoeGErMmaI43S/giphy.gif",
-    "💎 Decrypting cosmic algorithms...": "https://media.giphy.com/media/DHqth0hVQoIzS/giphy.gif",
-    "🔬 Running DNA sequence analysis...": "https://media.giphy.com/media/3oKIPEqDGUULpEU0aQ/giphy.gif",
-    "🎯 Applying deep learning models...": "https://media.giphy.com/media/l0HlHFRbmaZtBRhXG/giphy.gif",
-    "🌊 Surfing through data ocean...": "https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif",
-    "⚡ Charging flux capacitor...": "https://media.giphy.com/media/gHEfa33VkKAjm/giphy.gif",
-    "🎪 Performing complex calculations...": "https://media.giphy.com/media/BmmfETghGOPrW/giphy.gif",
-    "🔐 Breaking encryption codes...": "https://media.giphy.com/media/26tn8zNgXYhAWWJKo/giphy.gif",
-    "🌟 Consulting Elon Musk's AI...": "https://media.giphy.com/media/WT8vMFXcT8YLK/giphy.gif",
-    "📡 Establishing satellite connection...": "https://media.giphy.com/media/l3vRfNA1p0rvhMSvS/giphy.gif",
-    "🧬 Sequencing temporal DNA...": "https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif",
-    "🎨 Rendering 4D visualizations...": "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
-};
 
 interface Props {
     onDone: () => void;
@@ -37,57 +17,33 @@ const Preloader = ({ onDone }: Props) => {
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
     const isLowEnd = navigator.hardwareConcurrency <= 2;
 
+    // Only preload critical assets for faster initial load
     const preloadUrls = useMemo(() => {
-        return isMobile || isLowEnd
-            ? [
-                "/gif/3o7TKTDn976rzVgky4.gif",
-                "/gif/LmNwrBhejkK9EFP504.gif",
-                "/gif/xT9IgzoKnwFNmISR8I.gif",
-                "/gif/9FQ89bO3TipLASwmRs.gif",
-                "/gif/l0HlQXlQ3nHyLMvte.gif",
-                "/gif/l4FGpP4lxGGgK5CBW.gif",
-                "/gif/3oKIPwoeGErMmaI43S.gif",
-                "/gif/DHqth0hVQoIzS.gif",
-                "/gif/3oKIPEqDGUULpEU0aQ.gif",
-                "/gif/l0HlHFRbmaZtBRhXG.gif",
-                "/gif/26tn33aiTi1jkl6H6.gif",
-                "/gif/3o7qE4opCd6f1NJeuY.gif",
-                "/gif/BmmfETghGOPrW.gif",
-                "/gif/077i6AULCXc0FKTj9s.gif",
-                "/gif/gTviM5HfTDKapOJ8eL.gif",
-                "/gif/Zy7lVxTwoFE4BJoNUQ.gif",
-                "/gif/3o7TKSjRrfIPjeiVyM.gif",
-                "/gif/uSzTwQTqBWOuSmgDS9.gif",
-                "/gif/6Ar6K19y0GqOezYJRj.gif",
-                "/gif/Uh1ZPq7mA7xa8.gif",
-                "/gif/FWAcpJsFT9mvrv0e7a.gif",
-
-            ]
-            : [
-                "/gif/3o7TKTDn976rzVgky4.gif",
-                "/gif/LmNwrBhejkK9EFP504.gif",
-                "/gif/xT9IgzoKnwFNmISR8I.gif",
-                "/gif/9FQ89bO3TipLASwmRs.gif",
-                "/gif/l0HlQXlQ3nHyLMvte.gif",
-                "/gif/l4FGpP4lxGGgK5CBW.gif",
-                "/gif/3oKIPwoeGErMmaI43S.gif",
-                "/gif/DHqth0hVQoIzS.gif",
-                "/gif/3oKIPEqDGUULpEU0aQ.gif",
-                "/gif/l0HlHFRbmaZtBRhXG.gif",
-                "/gif/26tn33aiTi1jkl6H6.gif",
-                "/gif/3o7qE4opCd6f1NJeuY.gif",
-                "/gif/BmmfETghGOPrW.gif",
-                "/gif/077i6AULCXc0FKTj9s.gif",
-                "/gif/gTviM5HfTDKapOJ8eL.gif",
-                "/gif/Zy7lVxTwoFE4BJoNUQ.gif",
-                "/gif/3o7TKSjRrfIPjeiVyM.gif",
-                "/gif/uSzTwQTqBWOuSmgDS9.gif",
-                "/gif/6Ar6K19y0GqOezYJRj.gif",
-                "/gif/Uh1ZPq7mA7xa8.gif",
-                "/gif/FWAcpJsFT9mvrv0e7a.gif",
-
-            ];
-    }, [isMobile, isLowEnd]);
+        // Preload only first 6 GIFs for better performance
+        return [
+            "/gif/3o7TKTDn976rzVgky4.gif",
+            "/gif/LmNwrBhejkK9EFP504.gif",
+            "/gif/xT9IgzoKnwFNmISR8I.gif",
+            "/gif/9FQ89bO3TipLASwmRs.gif",
+            "/gif/l0HlQXlQ3nHyLMvte.gif",
+            "/gif/l4FGpP4lxGGgK5CBW.gif",
+            "/gif/3oKIPwoeGErMmaI43S.gif",
+            "/gif/DHqth0hVQoIzS.gif",
+            "/gif/3oKIPEqDGUULpEU0aQ.gif",
+            "/gif/l0HlHFRbmaZtBRhXG.gif",
+            "/gif/26tn33aiTi1jkl6H6.gif",
+            "/gif/3o7qE4opCd6f1NJeuY.gif",
+            "/gif/BmmfETghGOPrW.gif",
+            "/gif/077i6AULCXc0FKTj9s.gif",
+            "/gif/gTviM5HfTDKapOJ8eL.gif",
+            "/gif/Zy7lVxTwoFE4BJoNUQ.gif",
+            "/gif/3o7TKSjRrfIPjeiVyM.gif",
+            "/gif/uSzTwQTqBWOuSmgDS9.gif",
+            "/gif/6Ar6K19y0GqOezYJRj.gif",
+            "/gif/Uh1ZPq7mA7xa8.gif",
+            "/gif/FWAcpJsFT9mvrv0e7a.gif",
+        ];
+    }, []);
 
     const [loadedBytes, setLoadedBytes] = useState(0);
     const [totalBytes, setTotalBytes] = useState(0);
@@ -120,6 +76,7 @@ const Preloader = ({ onDone }: Props) => {
 
     useEffect(() => {
         let cancelled = false;
+        let completed = false;
 
         if (preloadUrls.some((u) => u.includes("?bypass-cache=1"))) {
             caches.delete(CACHE_NAME);
@@ -146,6 +103,9 @@ const Preloader = ({ onDone }: Props) => {
                 const info = fileInfoMap.get(url);
                 total += info?.size || 0;
             }
+
+            // Ensure we have a minimum total to avoid division by zero
+            if (total === 0) total = preloadUrls.length * 100000; // Fallback estimate
             setTotalBytes(total);
 
             let downloaded = 0;
@@ -153,50 +113,74 @@ const Preloader = ({ onDone }: Props) => {
             let lastBytes = 0;
 
             for (const url of preloadUrls) {
-                const res = await cacheFile(url);
-                const reader = res.body?.getReader();
-                if (reader) {
-                    let buffer = 0;
-                    while (true) {
-                        const { done, value } = await reader.read();
-                        if (done) break;
-                        if (cancelled) return;
+                if (cancelled) return;
 
-                        downloaded += value?.length || 0;
-                        buffer += value?.length || 0;
+                try {
+                    const res = await cacheFile(url);
+                    const reader = res.body?.getReader();
+                    if (reader) {
+                        let buffer = 0;
+                        while (true) {
+                            const { done, value } = await reader.read();
+                            if (done) break;
+                            if (cancelled) return;
 
-                        if (buffer > 10_000) {
-                            setLoadedBytes(downloaded);
-                            buffer = 0;
-                        }
+                            downloaded += value?.length || 0;
+                            buffer += value?.length || 0;
 
-                        const now = performance.now();
-                        const diff = (now - lastTime) / 1000;
-                        if (diff > 0.2) {
-                            const bytesDiff = downloaded - lastBytes;
-                            const currentSpeed = bytesDiff / diff;
-                            setSpeed(currentSpeed);
-                            const remaining = total - downloaded;
-                            setEta(currentSpeed > 0 ? remaining / currentSpeed : null);
-                            lastBytes = downloaded;
-                            lastTime = now;
+                            if (buffer > 10_000) {
+                                setLoadedBytes(downloaded);
+                                buffer = 0;
+                            }
+
+                            const now = performance.now();
+                            const diff = (now - lastTime) / 1000;
+                            if (diff >= 0.5) {
+                                const s = (downloaded - lastBytes) / diff;
+                                setSpeed(s);
+                                setEta((total - downloaded) / s);
+                                lastTime = now;
+                                lastBytes = downloaded;
+                            }
                         }
                     }
-                    setLoadedBytes(downloaded);
+                    markLoadedFile(url);
+                } catch (err) {
+                    console.error(`Failed to preload ${url}:`, err);
+                    // Continue with other files even if one fails
                 }
             }
 
-            if (!cancelled) onDone();
+            if (!cancelled && !completed) {
+                completed = true;
+                onDone();
+            }
         };
 
         const preloadMobile = async () => {
-            await Promise.all(
-                preloadUrls.map(async (url) => {
-                    await cacheFile(url);
-                    markLoadedFile(url);
-                })
-            );
-            if (!cancelled) onDone();
+            try {
+                await Promise.all(
+                    preloadUrls.map(async (url) => {
+                        if (cancelled) return;
+                        try {
+                            await cacheFile(url);
+                            markLoadedFile(url);
+                        } catch (err) {
+                            console.error(`Failed to preload ${url}:`, err);
+                        }
+                    })
+                );
+                if (!cancelled && !completed) {
+                    completed = true;
+                    onDone();
+                }
+            } catch (err) {
+                console.error('Preload error:', err);
+                if (!cancelled && !completed) {
+                    completed = true;
+                    onDone();
+                }
+            }
         };
 
         if (isMobile || isLowEnd) preloadMobile();
@@ -205,7 +189,7 @@ const Preloader = ({ onDone }: Props) => {
         return () => {
             cancelled = true;
         };
-    }, [onDone, isMobile, isLowEnd, preloadUrls]);
+    }, [isMobile, isLowEnd]);
 
     const pct =
         isMobile || isLowEnd
@@ -219,29 +203,39 @@ const Preloader = ({ onDone }: Props) => {
     return (
         <div
             className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black bg-contain bg-center bg-no-repeat"
-            style={{ backgroundImage: `url('./jinwoo.png')` }}
+            style={{
+                backgroundImage: `url('./jinwoo.png')`,
+                imageRendering: 'crisp-edges'
+            }}
         >
 
             <div className="w-11/12 max-w-md h-8 rounded-full bg-white/10 backdrop-blur-md shadow-lg overflow-hidden">
                 <div
-                    className="h-full bg-pink-500 transition-all duration-300 ease-out animate-pulse"
-                    style={{ width: `${pct}%` }}
+                    className="h-full bg-pink-500 transition-all duration-300 ease-out"
+                    style={{
+                        width: `${pct}%`,
+                        willChange: 'width'
+                    }}
                 />
             </div>
 
             <div className="mt-4 sm:mt-6 text-base sm:text-lg text-white text-center space-y-1 sm:space-y-2 font-mono drop-shadow-lg">
-                <p>{pct.toFixed(1)}%</p>
+                <p className="font-bold text-2xl">{pct.toFixed(1)}%</p>
                 {isMobile || isLowEnd ? (
-                    <p>
-                        {loadedFilesSet.size} / {preloadUrls.length} files
+                    <p className="text-sm opacity-80">
+                        {loadedFilesSet.size} / {preloadUrls.length} assets loaded
                     </p>
                 ) : (
                     <>
-                        <p>
+                        <p className="text-sm opacity-80">
                             {mb(loadedBytes)} / {mb(totalBytes)} MB
                         </p>
-                        <p>{(speed / (1024 * 1024)).toFixed(2)} MB/s</p>
-                        <p>ETA: {eta ? eta.toFixed(1) : "--"}s</p>
+                        {speed > 0 && (
+                            <>
+                                <p className="text-xs opacity-70">{(speed / (1024 * 1024)).toFixed(2)} MB/s</p>
+                                {eta && eta > 0 && <p className="text-xs opacity-70">ETA: {eta.toFixed(1)}s</p>}
+                            </>
+                        )}
                     </>
                 )}
             </div>

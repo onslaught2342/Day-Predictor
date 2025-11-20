@@ -47,79 +47,87 @@ export default function DayPredictor() {
     { text: "... Calling ANYA", gif: "./gif/FWAcpJsFT9mvrv0e7a.gif", delay: 1200 },
   ];
 
+
   useEffect(() => {
     // Set initial button state so GSAP can animate
     gsap.set(buttonsRef.current?.children, { opacity: 0, scale: 0 });
 
-    // Entrance animations
+    const isMobile = window.matchMedia("(max-width: 768px)").matches || 'ontouchstart' in window;
+    const isLowEnd = navigator.hardwareConcurrency <= 2;
+
+    // Entrance animations - simplified on low-end devices
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
     tl.from(headerRef.current, {
       y: -100,
       opacity: 0,
-      duration: 1,
+      duration: isMobile ? 0.6 : 1,
       ease: "back.out(1.7)"
     })
       .from(cardRef.current, {
         scale: 0.8,
         opacity: 0,
-        duration: 1,
+        duration: isMobile ? 0.6 : 1,
         ease: "back.out(1.7)"
       }, "-=0.5")
       .to(buttonsRef.current?.children, {
         scale: 1,
         opacity: 1,
-        stagger: 0.1,
-        duration: 0.5,
+        stagger: isMobile ? 0.05 : 0.1,
+        duration: isMobile ? 0.3 : 0.5,
         ease: "back.out(2)"
       }, "-=0.3");
 
-    // Floating animation for decorative elements
-    gsap.to([floatingRef1.current, floatingRef2.current], {
-      y: "random(-30, 30)",
-      x: "random(-20, 20)",
-      duration: "random(3, 5)",
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-      stagger: 1
-    });
-
-    // 3D card tilt effect
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!cardRef.current) return;
-      const card = cardRef.current;
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = (y - centerY) / 20;
-      const rotateY = (centerX - x) / 20;
-      gsap.to(card, {
-        rotationX: rotateX,
-        rotationY: rotateY,
-        duration: 0.5,
-        ease: "power2.out",
-        transformPerspective: 1000
+    // Floating animation - only on desktop with good performance
+    if (!isMobile && !isLowEnd) {
+      gsap.to([floatingRef1.current, floatingRef2.current], {
+        y: "random(-30, 30)",
+        x: "random(-20, 20)",
+        duration: "random(3, 5)",
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 1
       });
-    };
+    }
 
-    const handleMouseLeave = () => {
-      gsap.to(cardRef.current, {
-        rotationX: 0,
-        rotationY: 0,
-        duration: 0.5,
-        ease: "power2.out"
-      });
-    };
+    // 3D card tilt effect - only on desktop devices
+    if (!isMobile) {
+      const handleMouseMove = (e: MouseEvent) => {
+        if (!cardRef.current) return;
+        const card = cardRef.current;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        gsap.to(card, {
+          rotationX: rotateX,
+          rotationY: rotateY,
+          duration: 0.5,
+          ease: "power2.out",
+          transformPerspective: 1000
+        });
+      };
 
-    cardRef.current?.addEventListener('mousemove', handleMouseMove);
-    cardRef.current?.addEventListener('mouseleave', handleMouseLeave);
+      const handleMouseLeave = () => {
+        gsap.to(cardRef.current, {
+          rotationX: 0,
+          rotationY: 0,
+          duration: 0.5,
+          ease: "power2.out"
+        });
+      };
 
-    return () => {
-      cardRef.current?.removeEventListener('mousemove', handleMouseMove);
-      cardRef.current?.removeEventListener('mouseleave', handleMouseLeave);
-    };
+      cardRef.current?.addEventListener('mousemove', handleMouseMove);
+      cardRef.current?.addEventListener('mouseleave', handleMouseLeave);
+
+      return () => {
+        cardRef.current?.removeEventListener('mousemove', handleMouseMove);
+        cardRef.current?.removeEventListener('mouseleave', handleMouseLeave);
+      };
+    }
   }, []);
 
   const getNextDay = (day: string) => {
@@ -127,8 +135,21 @@ export default function DayPredictor() {
     return days[(index + 1) % 7];
   };
 
+  // Haptic feedback helper for mobile
+  const triggerHaptic = (intensity: 'light' | 'medium' | 'heavy' = 'light') => {
+    if ('vibrate' in navigator) {
+      const patterns = {
+        light: 10,
+        medium: 20,
+        heavy: 30
+      };
+      navigator.vibrate(patterns[intensity]);
+    }
+  };
+
   const handleDaySelect = (day: string) => {
     setSelectedDay(day);
+    triggerHaptic('light');
     gsap.fromTo(
       `#day-${day}`,
       { scale: 0.9 },
@@ -139,6 +160,7 @@ export default function DayPredictor() {
 
   const handlePredict = () => {
     if (!selectedDay) return;
+    triggerHaptic('medium');
     setIsLoading(true);
     setShowSuccess(false);
     setResult('');
@@ -152,9 +174,20 @@ export default function DayPredictor() {
 
     let index = 0;
 
+    // Lazy load GIFs as we go
+    const preloadNextGif = (nextIndex: number) => {
+      if (nextIndex < loadingContent.length) {
+        const img = new Image();
+        img.src = loadingContent[nextIndex].gif;
+      }
+    };
+
     const showNextContent = () => {
       if (index < loadingContent.length) {
         const content = loadingContent[index];
+
+        // Preload next GIF while showing current
+        preloadNextGif(index + 1);
 
         // Force update both text and gif together
         setLoadingText(content.text);
@@ -171,6 +204,7 @@ export default function DayPredictor() {
         // All content shown, now show the result
         setIsLoading(false);
         setShowSuccess(true);
+        triggerHaptic('heavy');
         const nextDay = getNextDay(selectedDay);
         setResult(nextDay);
 
@@ -212,7 +246,7 @@ export default function DayPredictor() {
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-2 sm:mb-4 tracking-tight px-2">Day Predictor Pro™</h1>
             <div className="inline-block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-shift bg-[size:200%_auto]">
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold px-2">🎓 Project By Onslaught2342</p>
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold px-2">🎓 Final Year Project by Irfan Shaha</p>
             </div>
             <div className="flex items-center justify-center gap-1 sm:gap-2 mt-2 sm:mt-4 text-muted-foreground px-2">
               <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-secondary animate-pulse flex-shrink-0" />
