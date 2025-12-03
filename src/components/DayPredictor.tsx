@@ -246,7 +246,7 @@ export default function DayPredictor() {
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-2 sm:mb-4 tracking-tight px-2">Day Predictor Pro™</h1>
             <div className="inline-block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient-shift bg-[size:200%_auto]">
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold px-2">Project by onslaught2342</p>
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold px-2">Project by Onslaught2342</p>
             </div>
             <div className="flex items-center justify-center gap-1 sm:gap-2 mt-2 sm:mt-4 text-muted-foreground px-2">
               <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-secondary animate-pulse flex-shrink-0" />
