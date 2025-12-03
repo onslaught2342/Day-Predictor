@@ -24,27 +24,27 @@ export default function DayPredictor() {
   ];
 
   const loadingContent: { text: string; gif: string; delay?: number }[] = [
-    { text: "🔮 Consulting ancient astrologers...", gif: "./gif/3o7TKTDn976rzVgky4.gif", delay: 800 },
-    { text: "🤖 Deploying AI neural networks...", gif: "./gif/LmNwrBhejkK9EFP504.gif", delay: 1000 },
-    { text: "⚛️ Using quantum computing algorithms...", gif: "./gif/xT9IgzoKnwFNmISR8I.gif", delay: 900 },
-    { text: "🔗 Scanning via blockchain technology...", gif: "./gif/9FQ89bO3TipLASwmRs.gif", delay: 700 },
-    { text: "🛸 Contacting NASA satellites...", gif: "./gif/l0HlQXlQ3nHyLMvte.gif", delay: 800 },
-    { text: "🧠 Analyzing with machine learning...", gif: "./gif/l4FGpP4lxGGgK5CBW.gif", delay: 1000 },
-    { text: "🌌 Accessing space-time continuum...", gif: "./gif/3oKIPwoeGErMmaI43S.gif", delay: 1200 },
-    { text: "💎 Decrypting cosmic algorithms...", gif: "./gif/DHqth0hVQoIzS.gif", delay: 900 },
-    { text: "🔬 Running DNA sequence analysis...", gif: "./gif/3oKIPEqDGUULpEU0aQ.gif", delay: 800 },
-    { text: "🎯 Applying deep learning models...", gif: "./gif/l0HlHFRbmaZtBRhXG.gif", delay: 700 },
-    { text: "🌊 Surfing through data ocean...", gif: "./gif/26tn33aiTi1jkl6H6.gif", delay: 800 },
-    { text: "⚡ Charging flux capacitor...", gif: "./gif/3o7qE4opCd6f1NJeuY.gif", delay: 800 },
-    { text: "🎪 Performing complex calculations...", gif: "./gif/BmmfETghGOPrW.gif", delay: 900 },
-    { text: "🔐 Breaking encryption codes...", gif: "./gif/077i6AULCXc0FKTj9s.gif", delay: 1000 },
-    { text: "🌟 Consulting Elon Musk's AI...", gif: "./gif/gTviM5HfTDKapOJ8eL.gif", delay: 900 },
-    { text: "📡 Establishing satellite connection...", gif: "./gif/Zy7lVxTwoFE4BJoNUQ.gif", delay: 1000 },
-    { text: "🧬 Sequencing temporal DNA...", gif: "./gif/3o7TKSjRrfIPjeiVyM.gif", delay: 900 },
-    { text: "🎨 Rendering 4D visualizations...", gif: "./gif/uSzTwQTqBWOuSmgDS9.gif", delay: 1200 },
-    { text: "📞 Calling Sung Jin Woo", gif: "./gif/6Ar6K19y0GqOezYJRj.gif", delay: 1500 },
-    { text: "... Calling Mr BEAN", gif: "./gif/Uh1ZPq7mA7xa8.gif", delay: 1200 },
-    { text: "... Calling ANYA", gif: "./gif/FWAcpJsFT9mvrv0e7a.gif", delay: 1200 },
+    { text: "🔮 Consulting ancient astrologers...", gif: "./gif/3o7TKTDn976rzVgky4.webm", delay: 800 },
+    { text: "🤖 Deploying AI neural networks...", gif: "./gif/LmNwrBhejkK9EFP504.webm", delay: 1000 },
+    { text: "⚛️ Using quantum computing algorithms...", gif: "./gif/xT9IgzoKnwFNmISR8I.webm", delay: 900 },
+    { text: "🔗 Scanning via blockchain technology...", gif: "./gif/9FQ89bO3TipLASwmRs.webm", delay: 700 },
+    { text: "🛸 Contacting NASA satellites...", gif: "./gif/l0HlQXlQ3nHyLMvte.webm", delay: 800 },
+    { text: "🧠 Analyzing with machine learning...", gif: "./gif/l4FGpP4lxGGgK5CBW.webm", delay: 1000 },
+    { text: "🌌 Accessing space-time continuum...", gif: "./gif/3oKIPwoeGErMmaI43S.webm", delay: 1200 },
+    { text: "💎 Decrypting cosmic algorithms...", gif: "./gif/DHqth0hVQoIzS.webm", delay: 900 },
+    { text: "🔬 Running DNA sequence analysis...", gif: "./gif/3oKIPEqDGUULpEU0aQ.webm", delay: 800 },
+    { text: "🎯 Applying deep learning models...", gif: "./gif/l0HlHFRbmaZtBRhXG.webm", delay: 700 },
+    { text: "🌊 Surfing through data ocean...", gif: "./gif/26tn33aiTi1jkl6H6.webm", delay: 800 },
+    { text: "⚡ Charging flux capacitor...", gif: "./gif/3o7qE4opCd6f1NJeuY.webm", delay: 800 },
+    { text: "🎪 Performing complex calculations...", gif: "./gif/BmmfETghGOPrW.webm", delay: 900 },
+    { text: "🔐 Breaking encryption codes...", gif: "./gif/077i6AULCXc0FKTj9s.webm", delay: 1000 },
+    { text: "🌟 Consulting Elon Musk's AI...", gif: "./gif/gTviM5HfTDKapOJ8eL.webm", delay: 900 },
+    { text: "📡 Establishing satellite connection...", gif: "./gif/Zy7lVxTwoFE4BJoNUQ.webm", delay: 1000 },
+    { text: "🧬 Sequencing temporal DNA...", gif: "./gif/3o7TKSjRrfIPjeiVyM.webm", delay: 900 },
+    { text: "🎨 Rendering 4D visualizations...", gif: "./gif/uSzTwQTqBWOuSmgDS9.webm", delay: 1200 },
+    { text: "📞 Calling Sung Jin Woo", gif: "./gif/6Ar6K19y0GqOezYJRj.webm", delay: 1500 },
+    { text: "... Calling Mr BEAN", gif: "./gif/Uh1ZPq7mA7xa8.webm", delay: 1200 },
+    { text: "... Calling ANYA", gif: "./gif/FWAcpJsFT9mvrv0e7a.webm", delay: 1200 },
   ];
 
 
@@ -174,20 +174,9 @@ export default function DayPredictor() {
 
     let index = 0;
 
-    // Lazy load GIFs as we go
-    const preloadNextGif = (nextIndex: number) => {
-      if (nextIndex < loadingContent.length) {
-        const img = new Image();
-        img.src = loadingContent[nextIndex].gif;
-      }
-    };
-
     const showNextContent = () => {
       if (index < loadingContent.length) {
         const content = loadingContent[index];
-
-        // Preload next GIF while showing current
-        preloadNextGif(index + 1);
 
         // Force update both text and gif together
         setLoadingText(content.text);
@@ -201,13 +190,11 @@ export default function DayPredictor() {
 
         setTimeout(showNextContent, delay);
       } else {
-        // All content shown, now show the result
         setIsLoading(false);
         setShowSuccess(true);
         triggerHaptic('heavy');
         const nextDay = getNextDay(selectedDay);
         setResult(nextDay);
-
         gsap.to(buttonsRef.current, { opacity: 1, scale: 1, duration: 0.3 });
         gsap.fromTo(resultRef.current, { scale: 0, rotation: -180, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 1, ease: "elastic.out(1, 0.5)" });
 
@@ -286,10 +273,13 @@ export default function DayPredictor() {
               {loadingGif && (
                 <div className="mb-4 sm:mb-6 flex justify-center">
                   <div className="bg-muted rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 border border-primary/50 sm:border-2 shadow-lg">
-                    <img
+                    <video
                       key={loadingGif}
                       src={loadingGif}
-                      alt="Loading animation"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
                       className="loading-gif w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain rounded-lg"
                     />
                   </div>
