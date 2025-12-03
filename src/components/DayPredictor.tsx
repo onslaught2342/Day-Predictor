@@ -48,6 +48,7 @@ export default function DayPredictor() {
   ];
 
 
+
   useEffect(() => {
     // Set initial button state so GSAP can animate
     gsap.set(buttonsRef.current?.children, { opacity: 0, scale: 0 });
@@ -157,6 +158,18 @@ export default function DayPredictor() {
     );
   };
 
+  const [videoReady, setVideoReady] = useState(false);
+
+  useEffect(() => {
+    if (!loadingGif) return;
+
+    setVideoReady(false);
+
+    const vid = document.createElement("video");
+    vid.src = loadingGif;
+    vid.preload = "auto";
+    vid.oncanplaythrough = () => setVideoReady(true);
+  }, [loadingGif]);
 
   const handlePredict = () => {
     if (!selectedDay) return;
@@ -270,11 +283,10 @@ export default function DayPredictor() {
           {isLoading && (
             <div className="mt-4 sm:mt-6 md:mt-8 bg-card backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 text-center border-2 sm:border-4 border-primary shadow-[0_0_60px_rgba(0,200,255,0.5)] animate-scale-in">
               {/* GIF/Image Display Box */}
-              {loadingGif && (
+              {isLoading && videoReady && (
                 <div className="mb-4 sm:mb-6 flex justify-center">
                   <div className="bg-muted rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 border border-primary/50 sm:border-2 shadow-lg">
                     <video
-                      key={loadingGif}
                       src={loadingGif}
                       autoPlay
                       loop
